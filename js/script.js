@@ -3,13 +3,16 @@ function calculate() {
   const resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = "";
 
-  const cheapestPrice = Math.min(...products.map(p => p.price));
+  const errorDiv = document.getElementById("error-message");
+  if (errorDiv) errorDiv.textContent = "";
+
+  const cheapestPrice = Math.min(...products.map((p) => p.price));
 
   if (isNaN(amount) || amount <= 0 || amount < cheapestPrice) {
-    const errorDiv = document.createElement("div");
-    errorDiv.className = "error-message";
-    errorDiv.textContent = "Du kan inte köpa något för det lilla, jobba lite övertid.";
-    resultsDiv.appendChild(errorDiv);
+    const errorDivNew = document.createElement("div");
+    errorDivNew.id = "error-message";
+    errorDivNew.textContent = "Du kan inte köpa något för det lilla, jobba lite övertid.";
+    resultsDiv.appendChild(errorDivNew);
     return;
   }
 
@@ -25,7 +28,6 @@ function calculate() {
       .map((p, i) => ({ product: p, index: i }))
       .filter(({ product }) => product.price <= remaining);
 
-    // Apply language limits
     affordable = affordable.filter(({ product }) => {
       const name = product.name.toLowerCase();
       if (name.includes("(japansk") && japanskCount >= 2) return false;
@@ -39,7 +41,7 @@ function calculate() {
     const choice = affordable[Math.floor(Math.random() * affordable.length)];
     const price = choice.product.price;
 
-    // Try to add 1 to 3 of the chosen product randomly
+    // Pick 1 to 3 randomly, limited by remaining budget
     const maxQty = Math.min(Math.floor(remaining / price), 3);
     const qty = Math.floor(Math.random() * maxQty) + 1;
 
@@ -69,6 +71,7 @@ function calculate() {
       const img = document.createElement("img");
       img.src = product.image;
       img.alt = product.name;
+
       link.appendChild(img);
       productDiv.appendChild(link);
 
@@ -90,10 +93,25 @@ function calculate() {
   leftoverDiv.style.animationDelay = `${products.length * 100}ms`;
   resultsDiv.appendChild(leftoverDiv);
 
-  // Scroll into view if not already
+  // Scroll results into view if not visible
   const top = resultsDiv.getBoundingClientRect().top + window.scrollY;
   const buffer = 200;
   if (window.scrollY + buffer < top) {
     resultsDiv.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
+
+// Scroll-to-top button logic
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    scrollBtn.classList.add("show");
+  } else {
+    scrollBtn.classList.remove("show");
+  }
+});
+
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
