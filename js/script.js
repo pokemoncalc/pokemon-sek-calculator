@@ -93,7 +93,7 @@ function calculate() {
   leftoverDiv.style.animationDelay = `${products.length * 100}ms`;
   resultsDiv.appendChild(leftoverDiv);
 
-  // Scroll results into view if not visible
+  // Scroll results into view only if not visible
   const top = resultsDiv.getBoundingClientRect().top + window.scrollY;
   const buffer = 200;
   if (window.scrollY + buffer < top) {
