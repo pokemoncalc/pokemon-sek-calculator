@@ -54,6 +54,10 @@ function calculate() {
     if (name.includes("(kinesisk")) kinesiskCount += qty;
   }
 
+  // Insert a divider above results
+  const divider = document.createElement("hr");
+  resultsDiv.appendChild(divider);
+
   products.forEach((product, i) => {
     const qty = quantities[i];
     if (qty > 0) {
@@ -61,8 +65,7 @@ function calculate() {
 
       const productDiv = document.createElement("div");
       productDiv.className = "product";
-      productDiv.style.animationDelay = `${i * 100}ms`;
-      productDiv.classList.add("animate");
+      productDiv.style.animationDelay = `0ms`; // no delay, instant animation
 
       const link = document.createElement("a");
       link.href = product.url;
@@ -91,8 +94,7 @@ function calculate() {
   const leftoverDiv = document.createElement("div");
   leftoverDiv.className = "leftover";
   leftoverDiv.textContent = `Pengar kvar: ${remaining.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kr.`;
-  leftoverDiv.style.animationDelay = `${products.length * 100}ms`;
-  leftoverDiv.classList.add("animate");
+  leftoverDiv.style.animationDelay = `0ms`; // no delay
   resultsDiv.appendChild(leftoverDiv);
 
   // Scroll results into view if not visible
