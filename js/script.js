@@ -41,7 +41,7 @@ function calculate() {
     const choice = affordable[Math.floor(Math.random() * affordable.length)];
     const price = choice.product.price;
 
-    // Pick 1 to 3 randomly, limited by remaining budget
+    // Pick random quantity 1-3, limited by remaining budget
     const maxQty = Math.min(Math.floor(remaining / price), 3);
     const qty = Math.floor(Math.random() * maxQty) + 1;
 
@@ -54,10 +54,6 @@ function calculate() {
     if (name.includes("(kinesisk")) kinesiskCount += qty;
   }
 
-  // Insert a divider above results
-  const divider = document.createElement("hr");
-  resultsDiv.appendChild(divider);
-
   products.forEach((product, i) => {
     const qty = quantities[i];
     if (qty > 0) {
@@ -65,7 +61,7 @@ function calculate() {
 
       const productDiv = document.createElement("div");
       productDiv.className = "product";
-      productDiv.style.animationDelay = `0ms`; // no delay, instant animation
+      productDiv.style.animationDelay = `${i * 50}ms`;
 
       const link = document.createElement("a");
       link.href = product.url;
@@ -94,7 +90,7 @@ function calculate() {
   const leftoverDiv = document.createElement("div");
   leftoverDiv.className = "leftover";
   leftoverDiv.textContent = `Pengar kvar: ${remaining.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kr.`;
-  leftoverDiv.style.animationDelay = `0ms`; // no delay
+  leftoverDiv.style.animationDelay = `${products.length * 50}ms`;
   resultsDiv.appendChild(leftoverDiv);
 
   // Scroll results into view if not visible
