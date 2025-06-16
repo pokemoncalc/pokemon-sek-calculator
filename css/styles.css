@@ -11,16 +11,13 @@ body {
   align-items: center;
 }
 
-.container {
+#app {
   max-width: 600px;
   width: 100%;
   background: white;
   padding: 2rem 2.5rem;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 h1 {
@@ -37,22 +34,29 @@ h1 {
 
 .form-card {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  max-width: 600px;
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
   margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  justify-content: center;
 }
 
 label {
   font-weight: bold;
   font-size: 1.1rem;
-  align-self: flex-start;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 input[type="number"] {
-  width: 100%;
-  max-width: 300px;
+  flex: 1 1 250px;
+  min-width: 200px;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   border: 2px solid #0077cc;
@@ -75,9 +79,7 @@ button {
   border-radius: 6px;
   box-shadow: 0 4px 8px rgb(0 119 204 / 0.4);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 0.5rem;
-  align-self: center;
-  width: 150px;
+  flex-shrink: 0;
 }
 
 button:hover {
@@ -98,32 +100,21 @@ button:active {
   text-align: center;
 }
 
-hr.divider {
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid #ddd;
-  margin: 1.5rem 0 1rem 0;
-}
-
 #results {
-  width: 100%;
+  margin-top: 1rem;
   max-height: 400px;
   overflow-y: auto;
   scroll-behavior: smooth;
   padding-right: 5px; /* for scrollbar */
-  /* Hide content initially for fade effect */
-  /* opacity and transform are handled per product */
+  width: 100%;
+  max-width: 600px;
 }
 
-.product,
-.leftover {
-  opacity: 0;
-  transform: translateY(15px);
-}
-
-.product.animate,
-.leftover.animate {
-  animation: fadeSlideUp 0.5s ease forwards;
+/* Divider above results */
+#results hr {
+  border: none;
+  border-top: 2px solid #0077cc;
+  margin: 1rem 0;
 }
 
 .product {
@@ -136,6 +127,9 @@ hr.divider {
   align-items: center;
   box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
   border-bottom: 1px solid #ddd;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeSlideIn 0.3s ease forwards;
 }
 
 .product:last-child {
@@ -173,16 +167,23 @@ hr.divider {
   margin-top: 2rem;
   font-weight: bold;
   font-size: 1.2rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeSlideIn 0.3s ease forwards;
 }
 
-@keyframes fadeSlideUp {
+@keyframes fadeSlideIn {
   0% {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(-5px);
   }
 }
 
