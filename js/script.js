@@ -25,34 +25,41 @@ function calculate() {
       .map((p, i) => ({ product: p, index: i }))
       .filter(({ product }) => product.price <= remaining);
 
+    // Apply language limits
     affordable = affordable.filter(({ product }) => {
       const name = product.name.toLowerCase();
-      if (name.match(/\(japansk/i) && japanskCount >= 2) return false;
-      if (name.match(/\(koreansk/i) && koreanskCount >= 2) return false;
-      if (name.match(/\(kinesisk/i) && kinesiskCount >= 2) return false;
+      if (name.includes("(japansk") && japanskCount >= 2) return false;
+      if (name.includes("(koreansk") && koreanskCount >= 2) return false;
+      if (name.includes("(kinesisk") && kinesiskCount >= 2) return false;
       return true;
     });
 
     if (affordable.length === 0) break;
 
     const choice = affordable[Math.floor(Math.random() * affordable.length)];
+    const price = choice.product.price;
 
-    quantities[choice.index]++;
-    remaining -= choice.product.price;
+    // Try to add 1 to 3 of the chosen product randomly
+    const maxQty = Math.min(Math.floor(remaining / price), 3);
+    const qty = Math.floor(Math.random() * maxQty) + 1;
 
-    const chosenName = choice.product.name.toLowerCase();
-    if (chosenName.match(/\(japansk/i)) japanskCount++;
-    if (chosenName.match(/\(koreansk/i)) koreanskCount++;
-    if (chosenName.match(/\(kinesisk/i)) kinesiskCount++;
+    quantities[choice.index] += qty;
+    remaining -= price * qty;
+
+    const name = choice.product.name.toLowerCase();
+    if (name.includes("(japansk")) japanskCount += qty;
+    if (name.includes("(koreansk")) koreanskCount += qty;
+    if (name.includes("(kinesisk")) kinesiskCount += qty;
   }
 
   products.forEach((product, i) => {
-    if (quantities[i] > 0) {
-      const quantity = quantities[i];
-      const totalPrice = quantity * product.price;
+    const qty = quantities[i];
+    if (qty > 0) {
+      const totalPrice = qty * product.price;
 
       const productDiv = document.createElement("div");
       productDiv.className = "product";
+      productDiv.style.animationDelay = `${i * 100}ms`;
 
       const link = document.createElement("a");
       link.href = product.url;
@@ -62,15 +69,14 @@ function calculate() {
       const img = document.createElement("img");
       img.src = product.image;
       img.alt = product.name;
-
       link.appendChild(img);
       productDiv.appendChild(link);
 
       const infoDiv = document.createElement("div");
       infoDiv.className = "product-info";
       infoDiv.innerHTML = `
-        ${quantity} × <a href="${product.url}" target="_blank" rel="noopener noreferrer">${product.name}</a><br/>
-        Pris: ${quantity} × ${product.price.toLocaleString()} kr = ${totalPrice.toLocaleString()} kr
+        ${qty} × <a href="${product.url}" target="_blank" rel="noopener noreferrer">${product.name}</a><br/>
+        Pris: ${qty} × ${product.price.toLocaleString()} kr = ${totalPrice.toLocaleString()} kr
       `;
 
       productDiv.appendChild(infoDiv);
@@ -80,6 +86,14 @@ function calculate() {
 
   const leftoverDiv = document.createElement("div");
   leftoverDiv.className = "leftover";
-  leftoverDiv.textContent = `Pengar kvar: ${remaining.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} kr.`;
+  leftoverDiv.textContent = `Pengar kvar: ${remaining.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kr.`;
+  leftoverDiv.style.animationDelay = `${products.length * 100}ms`;
   resultsDiv.appendChild(leftoverDiv);
+
+  // Scroll into view if not already
+  const top = resultsDiv.getBoundingClientRect().top + window.scrollY;
+  const buffer = 200;
+  if (window.scrollY + buffer < top) {
+    resultsDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
