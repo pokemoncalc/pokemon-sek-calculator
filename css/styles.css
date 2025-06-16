@@ -1,79 +1,91 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background: #f9f9f9;
+  padding: 0;
+  background: linear-gradient(to bottom right, #f0f8ff, #e0eafc);
   color: #333;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .container {
-  max-width: 800px;
-  margin: 2rem auto;
+  max-width: 700px;
+  margin: 3rem auto;
   padding: 2rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #2d2d2d;
 }
 
 #logo {
   display: block;
   margin: 0 auto 1rem auto;
-  max-width: 300px;
+  max-width: 250px;
   height: auto;
 }
 
-.form-group {
+.form-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  background: #f7faff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 label {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.1rem;
+  text-align: center;
 }
 
 input[type="number"] {
   width: 100%;
-  max-width: 300px;
-  padding: 0.5rem;
-  font-size: 1rem;
+  max-width: 320px;
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
   border: 2px solid #0077cc;
-  border-radius: 6px;
-  transition: border-color 0.3s ease;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.2s ease;
 }
 
 input[type="number"]:focus {
   outline: none;
   border-color: #005fa3;
+  box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.15);
 }
 
 button {
-  padding: 0.5rem 1.2rem;
-  font-size: 1rem;
-  cursor: pointer;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
   background: #0077cc;
   color: white;
   border: none;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgb(0 119 204 / 0.4);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 119, 204, 0.25);
 }
 
 button:hover {
   background: #005fa3;
-  box-shadow: 0 6px 12px rgb(0 95 163 / 0.6);
 }
 
 button:active {
   background: #004577;
-  box-shadow: 0 2px 5px rgb(0 71 119 / 0.7);
+  box-shadow: 0 2px 6px rgba(0, 71, 119, 0.4);
 }
 
 #error-message,
@@ -90,19 +102,19 @@ button:active {
 }
 
 .product {
-  background: #fefefe;
-  border-radius: 6px;
+  background: #ffffff;
+  border-radius: 8px;
   padding: 1rem;
-  margin: 1rem 0;
+  margin: 1.2rem 0;
   display: flex;
   gap: 1rem;
   align-items: center;
-  box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
-  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
-.product:last-child {
-  border-bottom: none;
+.product:hover {
+  transform: translateY(-3px);
 }
 
 .product img {
@@ -135,6 +147,42 @@ button:active {
 .leftover {
   margin-top: 2rem;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-align: center;
+  color: #007700;
+  animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll to top button */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #0077cc;
+  color: white;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+  background-color: #005fa3;
 }
