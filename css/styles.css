@@ -1,101 +1,140 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 2rem;
-    background: #f9f9f9;
-    color: #333;
-  }
-  h1 {
-    margin-bottom: 0.25rem;
-  }
-  #logo {
-    display: block;
-    margin: 0 auto 1rem auto;
-    max-width: 300px;
-    height: auto;
-  }
-  label {
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
-  input[type="number"] {
-    width: 250px;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 2px solid #0077cc;
-    border-radius: 6px;
-    transition: border-color 0.3s ease;
-  }
-  input[type="number"]:focus {
-    outline: none;
-    border-color: #005fa3;
-  }
-  button {
-    padding: 0.5rem 1.2rem;
-    font-size: 1rem;
-    margin-left: 0.5rem;
-    cursor: pointer;
-    background: #0077cc;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    box-shadow: 0 4px 8px rgb(0 119 204 / 0.4);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  button:hover {
-    background: #005fa3;
-    box-shadow: 0 6px 12px rgb(0 95 163 / 0.6);
-  }
-  button:active {
-    background: #004577;
-    box-shadow: 0 2px 5px rgb(0 71 119 / 0.7);
-  }
-  #results {
-    margin-top: 1.5rem;
-  }
-  .error-message {
-    margin-top: 1.5rem;
-    color: #cc3300;
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
-  .product {
-    background: white;
-    border-radius: 6px;
-    padding: 1rem;
-    margin: 1rem 0;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
-    border-bottom: 1px solid #ddd;
-  }
-  .product:last-child {
-    border-bottom: none;
-  }
-  .product img {
-    width: 100px;
-    height: auto;
-    border-radius: 6px;
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  .product img:hover {
-    transform: scale(1.05);
-  }
-  .product-info {
-    flex-grow: 1;
-  }
-  .product-info a {
-    font-weight: bold;
-    color: #0077cc;
-    text-decoration: none;
-  }
-  .product-info a:hover {
-    text-decoration: underline;
-  }
-  .leftover {
-    margin-top: 2rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+#logo {
+  display: block;
+  margin: 0 auto 1rem auto;
+  max-width: 300px;
+  height: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+label {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+input[type="number"] {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #0077cc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #005fa3;
+}
+
+button {
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgb(0 119 204 / 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background: #005fa3;
+  box-shadow: 0 6px 12px rgb(0 95 163 / 0.6);
+}
+
+button:active {
+  background: #004577;
+  box-shadow: 0 2px 5px rgb(0 71 119 / 0.7);
+}
+
+#error-message,
+.error-message {
+  margin-top: 1.5rem;
+  color: #cc3300;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+#results {
+  margin-top: 2rem;
+}
+
+.product {
+  background: #fefefe;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+  border-bottom: 1px solid #ddd;
+}
+
+.product:last-child {
+  border-bottom: none;
+}
+
+.product img {
+  width: 100px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.product img:hover {
+  transform: scale(1.05);
+}
+
+.product-info {
+  flex-grow: 1;
+}
+
+.product-info a {
+  font-weight: bold;
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.product-info a:hover {
+  text-decoration: underline;
+}
+
+.leftover {
+  margin-top: 2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+}
